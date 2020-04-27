@@ -1,9 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:psinder/pages/main/main_page.dart';
+import 'package:psinder/pages/splash/splash_page.dart';
 
 class PsinderApp extends StatelessWidget {
+  const PsinderApp({Key key}) : super(key: key);
+
+  factory PsinderApp.build() => PsinderApp();
+
   @override
   Widget build(BuildContext context) => EasyLocalization(
         child: Builder(
@@ -28,6 +32,6 @@ class PsinderApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.pink,
         ),
-        home: MainPage(),
+        home: SplashPage.build(),
       );
 }

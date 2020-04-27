@@ -1,5 +1,26 @@
 {
     "app.title": "Psinder",
     "main.title": "Psinder",
-    "main.cards": "Karty"
+    "main.cards": "Karty",
+    "login.title": "Logowanie",
+    "login.username.title": "Nazwa użytkownika",
+    "login.username.error": "Nazwa użytkownika jest wymagana",
+    "login.password.title": "Hasło",
+    "login.password.error": "Hasło jest wymagane",
+    "login.login": "Zaloguj się",
+    "login.no_account": "- Nie masz konta? -",
+    "login.register": "Zarejestruj się",
+    "register.title": "Rejestracja",
+    "register.username.title": "Nazwa użytkownika",
+    "register.username.error": "Nazwa użytkownika jest wymagana",
+    "register.email.title": "Adres e-mail",
+    "register.email.error": "Adres e-mail nie jest poprawny",
+    "register.password.title": "Hasło*",
+    "register.password.error": "Hasło powinno składać się z co najmniej 6 znaków",
+    "register.repeat_password.title": "Powtórz hasło*",
+    "register.repeat_password.error": "Podane hasła nie pasują do siebie",
+    "register.terms_and_conditions.title": "Akceptuję regulamin\ni politykę prywatności",
+    "register.terms_and_conditions.error": "Regulamin musi zostać zaakceptowany",
+    "register.password_hint": "* Hasło powinno składać się z co najmniej 6 znaków",
+    "register.register": "Zarejestruj się"
 }

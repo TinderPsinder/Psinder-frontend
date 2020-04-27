@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:psinder/pages/cards/cards_page.dart';
 
 class MainPage extends StatefulWidget {
+  const MainPage({Key key}) : super(key: key);
+
+  factory MainPage.build() => MainPage();
+
   @override
   _MainPageState createState() => _MainPageState();
 }
@@ -20,7 +24,7 @@ class _MainPageState extends State<MainPage> {
       _MainPageTab(
         title: tr('main.cards'),
         icon: Icons.credit_card,
-        builder: () => CardsPage(),
+        builder: () => CardsPage.build(),
       ),
       _MainPageTab(
         title: '-',
@@ -30,7 +34,9 @@ class _MainPageState extends State<MainPage> {
       _MainPageTab(
         title: '-',
         icon: Icons.settings,
-        builder: () => Container(),
+        builder: () => Container(child: MaterialButton(child: Text('Wyloguj'), onPressed: () {
+
+        })),
       ),
     ];
 

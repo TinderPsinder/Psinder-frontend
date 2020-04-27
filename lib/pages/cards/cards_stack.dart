@@ -7,12 +7,12 @@ class CardsStack extends StatelessWidget {
   final CardController controller;
 
   final _testImages = [
-    "assets/images/jamnik1.jpg",
-    "assets/images/jamnik2.jpg",
-    "assets/images/jamnik3.jpg",
-    "assets/images/jamnik4.jpg",
-    "assets/images/jamnik5.jpg",
-    "assets/images/jamnik6.jpg",
+    'assets/images/jamnik1.jpg',
+    'assets/images/jamnik2.jpg',
+    'assets/images/jamnik3.jpg',
+    'assets/images/jamnik4.jpg',
+    'assets/images/jamnik5.jpg',
+    'assets/images/jamnik6.jpg',
   ];
 
   @override

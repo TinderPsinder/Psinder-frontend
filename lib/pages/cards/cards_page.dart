@@ -3,6 +3,10 @@ import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:psinder/pages/cards/cards_stack.dart';
 
 class CardsPage extends StatefulWidget {
+  const CardsPage({Key key}) : super(key: key);
+
+  factory CardsPage.build() => CardsPage();
+
   @override
   _CardsPageState createState() => _CardsPageState();
 }
