@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:psinder/utils/show_alert.dart';
 
 extension FutureLoader on NavigatorState {
   Future<T> futureLoader<T>(Future<T> future) => push(
@@ -45,7 +46,15 @@ class __FutureLoaderWidgetState extends State<_FutureLoaderWidget> {
       );
 
   Future<void> _waitForFuture() async {
-    final result = await widget._future;
-    Navigator.pop(context, result);
+    try {
+      final result = await widget._future;
+      Navigator.pop(context, result);
+    } catch (exception) {
+      await showAlert(
+        context,
+        exception.toString(),
+        () => Navigator.pop(context, null),
+      );
+    }
   }
 }

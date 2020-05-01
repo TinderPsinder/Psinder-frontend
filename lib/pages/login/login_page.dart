@@ -23,6 +23,17 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +50,7 @@ class _LoginPageState extends State<LoginPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               TextFormField(
+                controller: _usernameController,
                 decoration:
                     InputDecoration(labelText: tr('login.username.title')),
                 validator: (value) =>
@@ -46,6 +58,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               SizedBox(height: 32),
               TextFormField(
+                controller: _passwordController,
                 decoration:
                     InputDecoration(labelText: tr('login.password.title')),
                 obscureText: true,
@@ -99,8 +112,8 @@ class _LoginPageState extends State<LoginPage> {
 
     await Navigator.of(context).futureLoader(
       widget._authService.login(
-        username: '',
-        password: '',
+        username: _usernameController.text,
+        password: _passwordController.text,
       ),
     );
 

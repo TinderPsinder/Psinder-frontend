@@ -1,0 +1,4 @@
+enum NetworkMethod {
+  get,
+  post,
+}

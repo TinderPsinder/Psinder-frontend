@@ -1,7 +1,19 @@
 import 'package:meta/meta.dart';
+import 'package:psinder/models/requests/login_request.dart';
+import 'package:psinder/models/requests/signup_request.dart';
+import 'package:psinder/models/responses/jwt_response.dart';
+import 'package:psinder/models/responses/message_response.dart';
+import 'package:psinder/models/role.dart';
+import 'package:psinder/services/network_service/network_method.dart';
+import 'package:psinder/services/network_service/network_service.dart';
+import 'package:psinder/services/persistence_service.dart';
+import 'package:psinder/utils/psinder_exception.dart';
 
 abstract class AuthService {
-  factory AuthService.build() => AuthServiceImpl();
+  factory AuthService.build() => AuthServiceImpl(
+        networkService: NetworkService.build(),
+        persistenceService: PersistenceService.build(),
+      );
 
   Future<bool> isLoggedIn();
 
@@ -10,7 +22,7 @@ abstract class AuthService {
     @required String password,
   });
 
-  Future<void> register({
+  Future<String> register({
     @required String username,
     @required String email,
     @required String password,
@@ -20,13 +32,20 @@ abstract class AuthService {
 }
 
 class AuthServiceImpl implements AuthService {
-  static bool _isLoggedIn = false;
+  AuthServiceImpl({
+    @required NetworkService networkService,
+    @required PersistenceService persistenceService,
+  })  : assert(networkService != null),
+        assert(persistenceService != null),
+        _networkService = networkService,
+        _persistenceService = persistenceService;
+
+  final NetworkService _networkService;
+  final PersistenceService _persistenceService;
 
   @override
   Future<bool> isLoggedIn() async {
-    await Future.delayed(Duration(milliseconds: 1000));
-
-    return _isLoggedIn;
+    return await _persistenceService.getToken() != null;
   }
 
   @override
@@ -34,26 +53,61 @@ class AuthServiceImpl implements AuthService {
     String username,
     String password,
   }) async {
-    await Future.delayed(Duration(milliseconds: 1000));
+    final request = LoginRequest(
+      username: username,
+      password: password,
+    );
 
-    _isLoggedIn = true;
+    final response = await _networkService.request(
+      method: NetworkMethod.post,
+      endpoint: 'auth/signin',
+      withToken: false,
+      body: request.toXml(),
+    );
+
+    // TODO: Implement alternative path on codes != 200
+
+    final jwtResponse = JwtResponse.fromXml(response.body);
+    if (jwtResponse.tokenType != 'Bearer') {
+      throw PsinderException('exception.auth.non_bearer');
+    }
+
+    _persistenceService.setToken(jwtResponse.accessToken);
   }
 
   @override
-  Future<void> register({
+  Future<String> register({
     String username,
     String email,
     String password,
   }) async {
-    await Future.delayed(Duration(milliseconds: 1000));
+    final request = SignupRequest(
+      username: username,
+      email: email,
+      password: password,
+      roles: {
+        Role.admin,
+        Role.moderator,
+        Role.user,
+      },
+    );
 
-    _isLoggedIn = true;
+    final response = await _networkService.request(
+      method: NetworkMethod.post,
+      endpoint: 'auth/signup',
+      withToken: false,
+      body: request.toXml(),
+    );
+
+    // TODO: Implement alternative path on codes != 200
+
+    final messageResponse = MessageResponse.fromXml(response.body);
+
+    return messageResponse.message;
   }
 
   @override
   Future<void> logout() async {
-    await Future.delayed(Duration(milliseconds: 1000));
-
-    _isLoggedIn = false;
+    await _persistenceService.setToken(null);
   }
 }

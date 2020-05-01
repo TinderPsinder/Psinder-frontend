@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:psinder/extensions/future_loader.dart';
-import 'package:psinder/pages/splash/splash_page.dart';
 import 'package:psinder/services/auth_service.dart';
+import 'package:psinder/utils/show_alert.dart';
 import 'package:psinder/widgets/checkbox_form_field.dart';
 import 'package:psinder/widgets/psinder_button.dart';
 
@@ -23,13 +23,18 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
+
+  final _usernameController = TextEditingController();
+  final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   @override
   void dispose() {
-    super.dispose();
-
+    _usernameController.dispose();
+    _emailController.dispose();
     _passwordController.dispose();
+
+    super.dispose();
   }
 
   @override
@@ -51,12 +56,14 @@ class _RegisterPageState extends State<RegisterPage> {
   List<Widget> _buildFormContent(BuildContext context) {
     return <Widget>[
       TextFormField(
+        controller: _usernameController,
         decoration: InputDecoration(labelText: tr('register.username.title')),
         validator: (value) =>
             value.trim().isEmpty ? tr('register.username.error') : null,
       ),
       SizedBox(height: 16),
       TextFormField(
+        controller: _emailController,
         decoration: InputDecoration(labelText: tr('register.email.title')),
         keyboardType: TextInputType.emailAddress,
         validator: (value) => value.trim().length < 3 && !value.contains('@')
@@ -65,8 +72,8 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
       SizedBox(height: 16),
       TextFormField(
-        decoration: InputDecoration(labelText: tr('register.password.title')),
         controller: _passwordController,
+        decoration: InputDecoration(labelText: tr('register.password.title')),
         obscureText: true,
         keyboardType: TextInputType.visiblePassword,
         validator: (value) =>
@@ -122,20 +129,18 @@ class _RegisterPageState extends State<RegisterPage> {
       return;
     }
 
-    await Navigator.of(context).futureLoader(
+    final message = await Navigator.of(context).futureLoader(
       widget._authService.register(
-        username: '',
-        email: '',
-        password: '',
+        username: _usernameController.text,
+        email: _emailController.text,
+        password: _passwordController.text,
       ),
     );
 
-    await Navigator.pushAndRemoveUntil(
+    await showAlert(
       context,
-      MaterialPageRoute(
-        builder: (_) => SplashPage.build(),
-      ),
-      (_) => false,
+      message,
+      () => Navigator.pop(context),
     );
   }
 }

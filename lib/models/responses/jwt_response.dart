@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 import 'package:psinder/models/role.dart';
+import 'package:psinder/utils/psinder_exception.dart';
 import 'package:xml/xml.dart' as xml;
 
 class JwtResponse {
@@ -17,12 +18,14 @@ class JwtResponse {
     @required this.roles,
     @required this.accessToken,
     @required this.tokenType,
-  })  : assert(id != null),
-        assert(username != null),
-        assert(email != null),
-        assert(roles != null),
-        assert(accessToken != null),
-        assert(tokenType != null);
+  }) {
+    if (id == null) throw PsinderException.parse('id');
+    if (username == null) throw PsinderException.parse('username');
+    if (email == null) throw PsinderException.parse('email');
+    if (roles == null) throw PsinderException.parse('roles');
+    if (accessToken == null) throw PsinderException.parse('accessToken');
+    if (tokenType == null) throw PsinderException.parse('tokenType');
+  }
 
   factory JwtResponse.fromXml(String xmlString) {
     final document = xml.parse(xmlString);

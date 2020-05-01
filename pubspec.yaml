@@ -22,6 +22,7 @@ dependencies:
 
   easy_localization: ^2.1.0+2
   flutter_tindercard: ^0.1.7
+  shared_preferences: ^0.5.7
   http: ^0.12.1
   xml: ^3.5.0
 

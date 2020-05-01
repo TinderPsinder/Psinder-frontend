@@ -1,5 +1,11 @@
 {
     "app.title": "Psinder",
+    "exception.network": "Wystąpił problem z połączeniem z siecią lub serwerem...",
+    "exception.parse": "Wystąpił problem z przetworzeniem pola modelu:",
+    "exception.unknown": "Wystąpił nieznany błąd...",
+    "exception.auth.non_bearer": "Niewspierany rodzaj tokenu...",
+    "alert.title": "Komunikat",
+    "alert.ok": "OK",
     "main.title": "Psinder",
     "main.cards": "Karty",
     "login.title": "Logowanie",
