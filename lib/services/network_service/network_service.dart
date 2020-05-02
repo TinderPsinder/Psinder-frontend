@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 import 'package:psinder/services/network_service/network_method.dart';
+import 'package:psinder/services/network_service/network_request.dart';
 import 'package:psinder/services/network_service/network_response.dart';
 import 'package:psinder/services/persistence_service.dart';
 import 'package:psinder/utils/psinder_exception.dart';
@@ -12,13 +13,7 @@ abstract class NetworkService {
         persistenceService: PersistenceService.build(),
       );
 
-  Future<NetworkResponse> request({
-    @required NetworkMethod method,
-    @required String endpoint,
-    bool withToken = true,
-    Map<String, String> headers,
-    dynamic body,
-  });
+  Future<NetworkResponse> request(NetworkRequest request);
 }
 
 class NetworkServiceImpl implements NetworkService {
@@ -26,7 +21,8 @@ class NetworkServiceImpl implements NetworkService {
       : assert(persistenceService != null),
         _persistenceService = persistenceService;
 
-  static const baseUrl = 'http://localhost/api/';
+  // static const baseUrl = 'http://localhost/api/';
+  static const baseUrl = 'https://psinder-gateway.herokuapp.com/api/';
 
   static const baseHeaders = {
     'Content-Type': 'application/xml',
@@ -35,19 +31,13 @@ class NetworkServiceImpl implements NetworkService {
 
   final PersistenceService _persistenceService;
 
-  Future<NetworkResponse> request({
-    @required NetworkMethod method,
-    @required String endpoint,
-    bool withToken = true,
-    Map<String, String> headers = const {},
-    dynamic body,
-  }) async {
+  Future<NetworkResponse> request(NetworkRequest request) async {
     final token = await _persistenceService.getToken();
-    final requestUrl = baseUrl + endpoint;
+    final requestUrl = baseUrl + request.endpoint;
     final requestHeaders = {
       ...baseHeaders,
-      ...headers,
-      if (withToken && token != null) ...{
+      ...request.headers,
+      if (request.withToken && token != null) ...{
         'Authorization': 'Bearer $token',
       },
     };
@@ -55,7 +45,7 @@ class NetworkServiceImpl implements NetworkService {
     http.Response response;
 
     try {
-      switch (method) {
+      switch (request.method) {
         case NetworkMethod.get:
           response = await http.get(
             requestUrl,
@@ -67,15 +57,24 @@ class NetworkServiceImpl implements NetworkService {
           response = await http.post(
             requestUrl,
             headers: requestHeaders,
-            body: body,
+            body: request.body,
           );
           break;
       }
 
-      return NetworkResponse(
+      if (request.withToken && response.statusCode == 401) {
+        await _persistenceService.setToken(null);
+      }
+
+      final result = NetworkResponse(
         statusCode: response.statusCode,
         body: response.body,
       );
+
+      print(request);
+      print(result);
+
+      return result;
     } on SocketException catch (exception) {
       throw PsinderException.network(exception);
     } catch (exception) {

@@ -59,16 +59,15 @@ class _RegisterPageState extends State<RegisterPage> {
         controller: _usernameController,
         decoration: InputDecoration(labelText: tr('register.username.title')),
         validator: (value) =>
-            value.trim().isEmpty ? tr('register.username.error') : null,
+            value.trim().length < 3 ? tr('register.username.error') : null,
       ),
       SizedBox(height: 16),
       TextFormField(
         controller: _emailController,
         decoration: InputDecoration(labelText: tr('register.email.title')),
         keyboardType: TextInputType.emailAddress,
-        validator: (value) => value.trim().length < 3 && !value.contains('@')
-            ? tr('register.email.error')
-            : null,
+        validator: (value) =>
+            _validateEmail(value) ? tr('register.email.error') : null,
       ),
       SizedBox(height: 16),
       TextFormField(
@@ -124,23 +123,41 @@ class _RegisterPageState extends State<RegisterPage> {
     ];
   }
 
+  bool _validateEmail(String email) {
+    final value = email?.trim() ?? '';
+    if (value.length < 3) {
+      return true;
+    }
+
+    final atIndex = value.indexOf('@');
+    if (atIndex == -1 || atIndex == 0 || atIndex == value.length - 1) {
+      return true;
+    }
+
+    return false;
+  }
+
   Future<void> _onRegisterPressed() async {
     if (!_formKey.currentState.validate()) {
       return;
     }
 
-    final message = await Navigator.of(context).futureLoader(
-      widget._authService.register(
-        username: _usernameController.text,
-        email: _emailController.text,
-        password: _passwordController.text,
-      ),
-    );
+    try {
+      final message = await Navigator.of(context).futureLoader(
+        widget._authService.register(
+          username: _usernameController.text.trim(),
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        ),
+      );
 
-    await showAlert(
-      context,
-      message,
-      () => Navigator.pop(context),
-    );
+      await showAlert(
+        context,
+        content: message,
+        onOk: () => Navigator.pop(context),
+      );
+    } catch (exception) {
+      await showAlert(context, content: exception.toString());
+    }
   }
 }

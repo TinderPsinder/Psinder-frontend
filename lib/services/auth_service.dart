@@ -5,6 +5,7 @@ import 'package:psinder/models/responses/jwt_response.dart';
 import 'package:psinder/models/responses/message_response.dart';
 import 'package:psinder/models/role.dart';
 import 'package:psinder/services/network_service/network_method.dart';
+import 'package:psinder/services/network_service/network_request.dart';
 import 'package:psinder/services/network_service/network_service.dart';
 import 'package:psinder/services/persistence_service.dart';
 import 'package:psinder/utils/psinder_exception.dart';
@@ -59,20 +60,30 @@ class AuthServiceImpl implements AuthService {
     );
 
     final response = await _networkService.request(
-      method: NetworkMethod.post,
-      endpoint: 'auth/signin',
-      withToken: false,
-      body: request.toXml(),
+      NetworkRequest(
+        method: NetworkMethod.post,
+        endpoint: 'auth/signin',
+        withToken: false,
+        body: request.toXml(),
+      ),
     );
 
-    // TODO: Implement alternative path on codes != 200
+    switch (response.statusCode) {
+      case 200:
+        final jwtResponse = JwtResponse.fromXml(response.body);
+        if (jwtResponse.tokenType != 'Bearer') {
+          throw PsinderException('exception.auth.non_bearer');
+        }
 
-    final jwtResponse = JwtResponse.fromXml(response.body);
-    if (jwtResponse.tokenType != 'Bearer') {
-      throw PsinderException('exception.auth.non_bearer');
+        _persistenceService.setToken(jwtResponse.accessToken);
+        break;
+
+      case 401:
+        throw PsinderException('exception.auth.unauthorized');
+
+      default:
+        throw PsinderException.unknown();
     }
-
-    _persistenceService.setToken(jwtResponse.accessToken);
   }
 
   @override
@@ -93,17 +104,23 @@ class AuthServiceImpl implements AuthService {
     );
 
     final response = await _networkService.request(
-      method: NetworkMethod.post,
-      endpoint: 'auth/signup',
-      withToken: false,
-      body: request.toXml(),
+      NetworkRequest(
+        method: NetworkMethod.post,
+        endpoint: 'auth/signup',
+        withToken: false,
+        body: request.toXml(),
+      ),
     );
 
-    // TODO: Implement alternative path on codes != 200
+    switch (response.statusCode) {
+      case 200:
+        final messageResponse = MessageResponse.fromXml(response.body);
 
-    final messageResponse = MessageResponse.fromXml(response.body);
+        return messageResponse.message;
 
-    return messageResponse.message;
+      default:
+        throw PsinderException.unknown();
+    }
   }
 
   @override

@@ -4,6 +4,7 @@ import 'package:psinder/extensions/future_loader.dart';
 import 'package:psinder/pages/register/register_page.dart';
 import 'package:psinder/pages/splash/splash_page.dart';
 import 'package:psinder/services/auth_service.dart';
+import 'package:psinder/utils/show_alert.dart';
 import 'package:psinder/widgets/psinder_button.dart';
 
 class LoginPage extends StatefulWidget {
@@ -110,18 +111,26 @@ class _LoginPageState extends State<LoginPage> {
       return;
     }
 
-    await Navigator.of(context).futureLoader(
-      widget._authService.login(
-        username: _usernameController.text,
-        password: _passwordController.text,
-      ),
-    );
+    try {
+      await Navigator.of(context).futureLoader(
+        widget._authService.login(
+          username: _usernameController.text.trim(),
+          password: _passwordController.text.trim(),
+        ),
+      );
 
-    await Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (_) => SplashPage.build(),
-      ),
-    );
+      await Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => SplashPage.build(),
+        ),
+      );
+    } catch (exception) {
+      await showAlert(
+        context,
+        content: exception.toString(),
+        onOk: () => Navigator.pop(context),
+      );
+    }
   }
 }

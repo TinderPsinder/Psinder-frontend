@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 import 'package:psinder/services/network_service/network_method.dart';
+import 'package:psinder/services/network_service/network_request.dart';
 import 'package:psinder/services/network_service/network_service.dart';
 
 abstract class CardsService {
@@ -21,8 +22,10 @@ class CardsServiceImpl implements CardsService {
   Future<List<String>> fetchCards() async {
     try {
       await _networkService.request(
-        method: NetworkMethod.get,
-        endpoint: 'cards/dogs',
+        NetworkRequest(
+          method: NetworkMethod.get,
+          endpoint: 'cards/dogs',
+        ),
       );
     } catch (_) {}
 

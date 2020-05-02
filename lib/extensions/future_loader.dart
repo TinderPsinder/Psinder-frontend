@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:psinder/utils/show_alert.dart';
+import 'package:psinder/utils/result.dart';
 
 extension FutureLoader on NavigatorState {
-  Future<T> futureLoader<T>(Future<T> future) => push(
-        PageRouteBuilder(
-          pageBuilder: (context, animation1, animation2) =>
-              _FutureLoaderWidget(future: future),
-          opaque: false,
-        ),
-      );
+  Future<T> futureLoader<T>(Future<T> future) async {
+    final Result<T> result = await push(
+      PageRouteBuilder(
+        pageBuilder: (context, animation1, animation2) =>
+            _FutureLoaderWidget(future: future),
+        opaque: false,
+      ),
+    );
+
+    if (result.isValue) {
+      return result.value;
+    } else {
+      throw result.error;
+    }
+  }
 }
 
 class _FutureLoaderWidget<T> extends StatefulWidget {
@@ -20,10 +28,10 @@ class _FutureLoaderWidget<T> extends StatefulWidget {
   final Future<T> _future;
 
   @override
-  __FutureLoaderWidgetState createState() => __FutureLoaderWidgetState();
+  __FutureLoaderWidgetState createState() => __FutureLoaderWidgetState<T>();
 }
 
-class __FutureLoaderWidgetState extends State<_FutureLoaderWidget> {
+class __FutureLoaderWidgetState<T> extends State<_FutureLoaderWidget> {
   @override
   void initState() {
     super.initState();
@@ -48,13 +56,9 @@ class __FutureLoaderWidgetState extends State<_FutureLoaderWidget> {
   Future<void> _waitForFuture() async {
     try {
       final result = await widget._future;
-      Navigator.pop(context, result);
+      Navigator.pop(context, Result<T>.value(result));
     } catch (exception) {
-      await showAlert(
-        context,
-        exception.toString(),
-        () => Navigator.pop(context, null),
-      );
+      Navigator.pop(context, Result<T>.error(exception));
     }
   }
 }

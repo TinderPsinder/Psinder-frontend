@@ -6,4 +6,7 @@ class NetworkResponse {
 
   final int statusCode;
   final String body;
+
+  String toString() =>
+      'NetworkResponse(statusCode: $statusCode, body: "$body")';
 }
