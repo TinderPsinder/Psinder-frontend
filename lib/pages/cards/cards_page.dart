@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
+import 'package:psinder/models/dog.dart';
 import 'package:psinder/pages/cards/cards_stack.dart';
+import 'package:psinder/pages/dog/dog_page.dart';
 import 'package:psinder/services/cards_service.dart';
+import 'package:psinder/widgets/circular_button.dart';
 
 class CardsPage extends StatefulWidget {
   const CardsPage({@required CardsService cardsService, Key key})
@@ -20,7 +23,7 @@ class CardsPage extends StatefulWidget {
 class _CardsPageState extends State<CardsPage> {
   final _cardController = CardController();
 
-  List<String> images;
+  List<Dog> dogs;
 
   @override
   void initState() {
@@ -34,11 +37,19 @@ class _CardsPageState extends State<CardsPage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            if (images != null)
-              CardsStack(
-                images: images,
-                controller: _cardController,
+            CardsStack(
+              images: dogs?.map((dog) => dog.pictures.first)?.toList(),
+              controller: _cardController,
+              onSwipe: (index, orientation) {
+                print('$index, $orientation');
+              },
+              onTap: (index) => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => DogPage.build(dog: dogs[index]),
+                ),
               ),
+            ),
             Padding(
               padding: EdgeInsets.only(top: 32.0, bottom: 48.0),
               child: _buildButtonsRow(),
@@ -50,12 +61,12 @@ class _CardsPageState extends State<CardsPage> {
   Widget _buildButtonsRow() => Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          _buildCircularButton(
+          CircularButton(
             color: Colors.red,
             icon: Icons.close,
             onPressed: () => _cardController.triggerLeft(),
           ),
-          _buildCircularButton(
+          CircularButton(
             color: Colors.green,
             icon: Icons.favorite,
             onPressed: () => _cardController.triggerRight(),
@@ -63,25 +74,11 @@ class _CardsPageState extends State<CardsPage> {
         ],
       );
 
-  Widget _buildCircularButton({
-    Color color,
-    IconData icon,
-    void Function() onPressed,
-  }) =>
-      MaterialButton(
-        onPressed: onPressed,
-        color: color,
-        textColor: Colors.white,
-        child: Icon(icon, size: 24.0),
-        padding: EdgeInsets.all(16.0),
-        shape: CircleBorder(),
-      );
-
   Future<void> _fetchCards() async {
-    final cards = await widget._cardsService.fetchCards();
+    final dogs = await widget._cardsService.fetchDogs();
 
     setState(() {
-      images = cards;
+      this.dogs = dogs;
     });
   }
 }

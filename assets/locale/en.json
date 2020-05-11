@@ -7,6 +7,8 @@
     "exception.auth.unauthorized": "Niepoprawna nazwa użytkownika lub hasło...",
     "alert.title": "Komunikat",
     "alert.ok": "OK",
+    "sex.dog": "Pies",
+    "sex.bitch": "Suka",
     "main.title": "Psinder",
     "main.cards": "Karty",
     "login.title": "Logowanie",
