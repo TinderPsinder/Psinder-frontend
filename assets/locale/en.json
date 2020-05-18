@@ -11,6 +11,7 @@
     "sex.bitch": "Suka",
     "main.title": "Psinder",
     "main.cards": "Karty",
+    "main.profile": "Profil",
     "login.title": "Logowanie",
     "login.username.title": "Nazwa użytkownika",
     "login.username.error": "Nazwa użytkownika jest wymagana",
@@ -31,5 +32,10 @@
     "register.terms_and_conditions.title": "Akceptuję regulamin\ni politykę prywatności",
     "register.terms_and_conditions.error": "Regulamin musi zostać zaakceptowany",
     "register.password_hint": "* Hasło powinno składać się z co najmniej 6 znaków",
-    "register.register": "Zarejestruj się"
+    "register.register": "Zarejestruj się",
+    "profile.preview": "Podgląd profilu",
+    "profile.premium": "Zakup konta premium",
+    "profile.logout": "Wyloguj",
+    "payment.title": "Zakup konta premium",
+    "payment.success": "Zakończono proces płatności. Status konta premium zostanie przyznany po weryfikacji płatności. Stan płatności można sprawdzić w wiadomości przesłanej na adres e-mail."
 }

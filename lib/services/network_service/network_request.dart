@@ -19,6 +19,9 @@ class NetworkRequest {
   final Map<String, String> headers;
   final dynamic body;
 
+  bool get isEndpointAbsolute =>
+      endpoint.startsWith('http://') || endpoint.startsWith('https://');
+
   String toString() =>
       'NetworkRequest(method: $method, endpoint: "$endpoint", withToken: $withToken, headers: $headers, body: "$body")';
 }

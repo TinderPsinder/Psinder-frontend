@@ -36,75 +36,73 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(tr('login.title')),
-      ),
-      body: Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.all(32.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              TextFormField(
-                controller: _usernameController,
-                decoration:
-                    InputDecoration(labelText: tr('login.username.title')),
-                validator: (value) =>
-                    value.trim().isEmpty ? tr('login.username.error') : null,
-              ),
-              SizedBox(height: 32),
-              TextFormField(
-                controller: _passwordController,
-                decoration:
-                    InputDecoration(labelText: tr('login.password.title')),
-                obscureText: true,
-                validator: (value) =>
-                    value.trim().isEmpty ? tr('login.password.error') : null,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 32.0,
-                  right: 32.0,
-                  top: 32.0,
-                  bottom: 64.0,
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text(tr('login.title')),
+        ),
+        body: Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.all(32.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                TextFormField(
+                  controller: _usernameController,
+                  decoration:
+                      InputDecoration(labelText: tr('login.username.title')),
+                  validator: (value) =>
+                      value.trim().isEmpty ? tr('login.username.error') : null,
                 ),
-                child: PsinderButton(
-                  text: tr('login.login'),
-                  onPressed: _onLoginPressed,
+                SizedBox(height: 32),
+                TextFormField(
+                  controller: _passwordController,
+                  decoration:
+                      InputDecoration(labelText: tr('login.password.title')),
+                  obscureText: true,
+                  validator: (value) =>
+                      value.trim().isEmpty ? tr('login.password.error') : null,
                 ),
-              ),
-              Text(
-                tr('login.no_account'),
-                textAlign: TextAlign.center,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 36.0,
-                  right: 36.0,
-                  top: 16.0,
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 32.0,
+                    right: 32.0,
+                    top: 32.0,
+                    bottom: 64.0,
+                  ),
+                  child: PsinderButton(
+                    text: tr('login.login'),
+                    onPressed: _onLoginPressed,
+                  ),
                 ),
-                child: PsinderButton(
-                  text: tr('login.register'),
-                  isFlat: true,
-                  onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => RegisterPage.build(),
+                Text(
+                  tr('login.no_account'),
+                  textAlign: TextAlign.center,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 36.0,
+                    right: 36.0,
+                    top: 16.0,
+                  ),
+                  child: PsinderButton(
+                    text: tr('login.register'),
+                    isFlat: true,
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => RegisterPage.build(),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
-    );
-  }
+      );
 
   Future<void> _onLoginPressed() async {
     if (!_formKey.currentState.validate()) {

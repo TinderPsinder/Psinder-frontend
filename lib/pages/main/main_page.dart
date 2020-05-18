@@ -1,8 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:psinder/pages/cards/cards_page.dart';
-import 'package:psinder/pages/splash/splash_page.dart';
-import 'package:psinder/services/auth_service.dart';
+import 'package:psinder/pages/profile/profile_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key key}) : super(key: key);
@@ -34,24 +33,9 @@ class _MainPageState extends State<MainPage> {
         builder: () => Container(),
       ),
       _MainPageTab(
-        title: '-',
-        icon: Icons.settings,
-        builder: () => Container(
-          alignment: Alignment.center,
-          child: MaterialButton(
-            child: Text('Wyloguj'),
-            onPressed: () async {
-              // TODO: Temporary button to logout
-              await AuthService.build().logout();
-              await Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => SplashPage.build(),
-                ),
-              );
-            },
-          ),
-        ),
+        title: tr('main.profile'),
+        icon: Icons.person,
+        builder: () => ProfilePage.build(),
       ),
     ];
 

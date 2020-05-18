@@ -38,90 +38,86 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(tr('register.title')),
-      ),
-      body: Form(
-        key: _formKey,
-        child: ListView(
-          children: _buildFormContent(context),
-          padding: EdgeInsets.all(32.0),
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text(tr('register.title')),
         ),
-      ),
-    );
-  }
+        body: Form(
+          key: _formKey,
+          child: ListView(
+            children: _buildFormContent(context),
+            padding: EdgeInsets.all(32.0),
+          ),
+        ),
+      );
 
-  List<Widget> _buildFormContent(BuildContext context) {
-    return <Widget>[
-      TextFormField(
-        controller: _usernameController,
-        decoration: InputDecoration(labelText: tr('register.username.title')),
-        validator: (value) =>
-            value.trim().length < 3 ? tr('register.username.error') : null,
-      ),
-      SizedBox(height: 16),
-      TextFormField(
-        controller: _emailController,
-        decoration: InputDecoration(labelText: tr('register.email.title')),
-        keyboardType: TextInputType.emailAddress,
-        validator: (value) =>
-            _validateEmail(value) ? tr('register.email.error') : null,
-      ),
-      SizedBox(height: 16),
-      TextFormField(
-        controller: _passwordController,
-        decoration: InputDecoration(labelText: tr('register.password.title')),
-        obscureText: true,
-        keyboardType: TextInputType.visiblePassword,
-        validator: (value) =>
-            value.trim().length < 6 ? tr('register.password.error') : null,
-      ),
-      SizedBox(height: 16),
-      TextFormField(
-        decoration:
-            InputDecoration(labelText: tr('register.repeat_password.title')),
-        obscureText: true,
-        keyboardType: TextInputType.visiblePassword,
-        validator: (value) => _passwordController.text != value
-            ? tr('register.repeat_password.error')
-            : null,
-      ),
-      SizedBox(height: 24),
-      CheckboxFormField(
-        context: context,
-        validator: (value) =>
-            value ? null : tr('register.terms_and_conditions.error'),
-        title: Text(
-          tr('register.terms_and_conditions.title'),
+  List<Widget> _buildFormContent(BuildContext context) => <Widget>[
+        TextFormField(
+          controller: _usernameController,
+          decoration: InputDecoration(labelText: tr('register.username.title')),
+          validator: (value) =>
+              value.trim().length < 3 ? tr('register.username.error') : null,
+        ),
+        SizedBox(height: 16),
+        TextFormField(
+          controller: _emailController,
+          decoration: InputDecoration(labelText: tr('register.email.title')),
+          keyboardType: TextInputType.emailAddress,
+          validator: (value) =>
+              _validateEmail(value) ? tr('register.email.error') : null,
+        ),
+        SizedBox(height: 16),
+        TextFormField(
+          controller: _passwordController,
+          decoration: InputDecoration(labelText: tr('register.password.title')),
+          obscureText: true,
+          keyboardType: TextInputType.visiblePassword,
+          validator: (value) =>
+              value.trim().length < 6 ? tr('register.password.error') : null,
+        ),
+        SizedBox(height: 16),
+        TextFormField(
+          decoration:
+              InputDecoration(labelText: tr('register.repeat_password.title')),
+          obscureText: true,
+          keyboardType: TextInputType.visiblePassword,
+          validator: (value) => _passwordController.text != value
+              ? tr('register.repeat_password.error')
+              : null,
+        ),
+        SizedBox(height: 24),
+        CheckboxFormField(
+          context: context,
+          validator: (value) =>
+              value ? null : tr('register.terms_and_conditions.error'),
+          title: Text(
+            tr('register.terms_and_conditions.title'),
+            style: TextStyle(
+              fontSize: 16.0,
+              color: Colors.grey.shade500,
+            ),
+          ),
+        ),
+        SizedBox(height: 24),
+        Text(
+          tr('register.password_hint'),
           style: TextStyle(
-            fontSize: 16.0,
+            fontSize: 12.0,
             color: Colors.grey.shade500,
           ),
         ),
-      ),
-      SizedBox(height: 24),
-      Text(
-        tr('register.password_hint'),
-        style: TextStyle(
-          fontSize: 12.0,
-          color: Colors.grey.shade500,
+        Padding(
+          padding: const EdgeInsets.only(
+            left: 32.0,
+            right: 32.0,
+            top: 32.0,
+          ),
+          child: PsinderButton(
+            text: tr('register.register'),
+            onPressed: _onRegisterPressed,
+          ),
         ),
-      ),
-      Padding(
-        padding: const EdgeInsets.only(
-          left: 32.0,
-          right: 32.0,
-          top: 32.0,
-        ),
-        child: PsinderButton(
-          text: tr('register.register'),
-          onPressed: _onRegisterPressed,
-        ),
-      ),
-    ];
-  }
+      ];
 
   bool _validateEmail(String email) {
     final value = email?.trim() ?? '';

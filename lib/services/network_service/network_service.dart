@@ -33,7 +33,9 @@ class NetworkServiceImpl implements NetworkService {
 
   Future<NetworkResponse> request(NetworkRequest request) async {
     final token = await _persistenceService.getToken();
-    final requestUrl = baseUrl + request.endpoint;
+    final requestUrl = request.isEndpointAbsolute
+        ? request.endpoint
+        : baseUrl + request.endpoint;
     final requestHeaders = {
       ...baseHeaders,
       ...request.headers,
