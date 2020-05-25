@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:psinder/pages/cards/cards_page.dart';
+import 'package:psinder/pages/map/map_page.dart';
 import 'package:psinder/pages/profile/profile_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -28,9 +29,9 @@ class _MainPageState extends State<MainPage> {
         builder: () => CardsPage.build(),
       ),
       _MainPageTab(
-        title: '-',
+        title: tr('main.map'),
         icon: Icons.place,
-        builder: () => Container(),
+        builder: () => MapPage.build(),
       ),
       _MainPageTab(
         title: tr('main.profile'),
