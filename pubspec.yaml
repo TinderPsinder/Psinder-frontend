@@ -27,6 +27,7 @@ dependencies:
   xml: ^3.5.0
   webview_flutter: ^0.3.21
   google_maps_flutter: ^0.5.28+1
+  image_picker: ^0.6.7
 
 dev_dependencies:
   flutter_test:

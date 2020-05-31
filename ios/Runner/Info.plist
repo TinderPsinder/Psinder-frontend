@@ -32,6 +32,12 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Aplikacja musi uzyskać dostęp do biblioteki zdjęć</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Aplikacja musi uzyskać dostęp do aparatu</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Aplikacja musi uzyskać dostęp do mikrofonu</string>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
 </dict>

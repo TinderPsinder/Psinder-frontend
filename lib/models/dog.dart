@@ -4,12 +4,12 @@ import 'package:psinder/utils/psinder_exception.dart';
 import 'package:xml/xml.dart' as xml;
 
 class Dog {
-  final String name;
-  final String breed;
-  final Sex sex;
-  final int age;
-  final String description;
-  final List<String> pictures;
+  String name;
+  String breed;
+  Sex sex;
+  int age;
+  String description;
+  List<String> pictures;
 
   Dog({
     @required this.name,
@@ -34,17 +34,17 @@ class Dog {
     return Dog(
       name: dog.findElements('name').first.text,
       breed: dog.findElements('breed').first.text,
-      sex: parseSex(dog.findElements('sex').first.text),
+      sex: _parseSex(dog.findElements('sex').first.text),
       age: int.parse(dog.findElements('age').first.text),
       description: dog.findElements('description').first.text,
-      pictures: parsePictures(dog.findElements('pictures').first),
+      pictures: _parsePictures(dog.findElements('pictures').first),
     );
   }
 
-  static List<String> parsePictures(xml.XmlElement pictures) =>
+  static List<String> _parsePictures(xml.XmlElement pictures) =>
       pictures.findElements('picture').map((picture) => picture.text).toList();
 
-  static Sex parseSex(String sex) {
+  static Sex _parseSex(String sex) {
     switch (sex.toUpperCase()) {
       case 'DOG':
         return Sex.dog;
@@ -56,4 +56,78 @@ class Dog {
         return null;
     }
   }
+
+  static List<Dog> get mocks => [
+        Dog(
+          name: 'Pies',
+          breed: 'Jamnik',
+          sex: Sex.dog,
+          age: 10,
+          description:
+              'Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies.',
+          pictures: [
+            'assets/images/jamnik1.jpg',
+            'assets/images/jamnik2.jpg',
+          ],
+        ),
+        Dog(
+          name: 'Pies',
+          breed: 'Jamnik',
+          sex: Sex.dog,
+          age: 10,
+          description:
+              'Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies.',
+          pictures: [
+            'assets/images/jamnik2.jpg',
+          ],
+        ),
+        Dog(
+          name: 'Pies',
+          breed: 'Jamnik',
+          sex: Sex.dog,
+          age: 10,
+          description:
+              'Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies.',
+          pictures: [
+            'assets/images/jamnik3.jpg',
+            'assets/images/jamnik2.jpg',
+          ],
+        ),
+        Dog(
+          name: 'Pies',
+          breed: 'Jamnik',
+          sex: Sex.dog,
+          age: 10,
+          description:
+              'Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies.',
+          pictures: [
+            'assets/images/jamnik4.jpg',
+            'assets/images/jamnik2.jpg',
+          ],
+        ),
+        Dog(
+          name: 'Pies',
+          breed: 'Jamnik',
+          sex: Sex.dog,
+          age: 10,
+          description:
+              'Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies.',
+          pictures: [
+            'assets/images/jamnik5.jpg',
+            'assets/images/jamnik2.jpg',
+          ],
+        ),
+        Dog(
+          name: 'Pies',
+          breed: 'Jamnik',
+          sex: Sex.dog,
+          age: 10,
+          description:
+              'Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies.',
+          pictures: [
+            'assets/images/jamnik6.jpg',
+            'assets/images/jamnik2.jpg',
+          ],
+        ),
+      ];
 }

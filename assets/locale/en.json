@@ -37,6 +37,12 @@
     "profile.preview": "Podgląd profilu",
     "profile.premium": "Zakup konta premium",
     "profile.logout": "Wyloguj",
+    "edit_profile.title": "Edycja profilu",
+    "edit_profile.name": "Imię",
+    "edit_profile.age": "Wiek",
+    "edit_profile.breed": "Rasa",
+    "edit_profile.description": "Opis",
+    "edit_profile.error": "Pole musi być wypełnione",
     "payment.title": "Zakup konta premium",
     "payment.success": "Zakończono proces płatności. Status konta premium zostanie przyznany po weryfikacji płatności. Stan płatności można sprawdzić w wiadomości przesłanej na adres e-mail."
 }

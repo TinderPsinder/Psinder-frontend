@@ -33,40 +33,41 @@ class _PaymentPageState extends State<PaymentPage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(
-        title: Text(tr('payment.title')),
-      ),
-      body: Stack(
-        children: <Widget>[
-          if (_paymentUrl != null)
-            WebView(
-              initialUrl: _paymentUrl,
-              javascriptMode: JavascriptMode.unrestricted,
-              onPageStarted: (page) {
-                if (page.endsWith('/auth')) {
-                  showAlert(
-                    context,
-                    content: tr('payment.success'),
-                    onOk: () => Navigator.pop(context),
-                  );
-                }
-              },
-              onPageFinished: (page) {
-                if (_isLoading) {
-                  setState(() => _isLoading = false);
-                }
-              },
-            ),
-          if (_isLoading)
-            Positioned.fill(
-              child: Container(
-                alignment: Alignment.center,
-                color: Colors.white.withOpacity(0.9),
-                child: CircularProgressIndicator(),
+        appBar: AppBar(
+          title: Text(tr('payment.title')),
+        ),
+        body: Stack(
+          children: <Widget>[
+            if (_paymentUrl != null)
+              WebView(
+                initialUrl: _paymentUrl,
+                javascriptMode: JavascriptMode.unrestricted,
+                onPageStarted: (page) {
+                  if (page.endsWith('/auth')) {
+                    showAlert(
+                      context,
+                      content: tr('payment.success'),
+                      onOk: () => Navigator.pop(context),
+                    );
+                  }
+                },
+                onPageFinished: (page) {
+                  if (_isLoading) {
+                    setState(() => _isLoading = false);
+                  }
+                },
               ),
-            ),
-        ],
-      ));
+            if (_isLoading)
+              Positioned.fill(
+                child: Container(
+                  alignment: Alignment.center,
+                  color: Colors.white.withOpacity(0.9),
+                  child: CircularProgressIndicator(),
+                ),
+              ),
+          ],
+        ),
+      );
 
   Future<void> _startPayment() async {
     setState(() => _isLoading = true);

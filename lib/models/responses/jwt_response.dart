@@ -35,13 +35,13 @@ class JwtResponse {
       id: jwtResponse.findElements('id').first.text,
       username: jwtResponse.findElements('username').first.text,
       email: jwtResponse.findElements('email').first.text,
-      roles: parseRoles(jwtResponse.findElements('roles').first),
+      roles: _parseRoles(jwtResponse.findElements('roles').first),
       accessToken: jwtResponse.findElements('accessToken').first.text,
       tokenType: jwtResponse.findElements('tokenType').first.text,
     );
   }
 
-  static Set<Role> parseRoles(xml.XmlElement roles) => roles
+  static Set<Role> _parseRoles(xml.XmlElement roles) => roles
       .findElements('roles')
       .map((role) {
         switch (role.text) {

@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:psinder/models/dog.dart';
+import 'package:psinder/pages/edit_profile/edit_profile_page.dart';
 import 'package:psinder/pages/payment/payment_page.dart';
 import 'package:psinder/pages/splash/splash_page.dart';
 import 'package:psinder/services/auth_service.dart';
@@ -27,7 +29,12 @@ class _ProfilePageState extends State<ProfilePage> {
             _buildPanel(
               icon: Icons.remove_red_eye,
               text: tr('profile.preview'),
-              onTap: () {},
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => EditProfilePage.build(dog: Dog.mocks.first),
+                ),
+              ),
             ),
             _buildPanel(
               icon: Icons.monetization_on,
