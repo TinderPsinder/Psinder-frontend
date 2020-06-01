@@ -22,6 +22,7 @@ class NetworkRequest {
   bool get isEndpointAbsolute =>
       endpoint.startsWith('http://') || endpoint.startsWith('https://');
 
+  @override
   String toString() =>
       'NetworkRequest(method: $method, endpoint: "$endpoint", withToken: $withToken, headers: $headers, body: "$body")';
 }

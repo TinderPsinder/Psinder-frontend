@@ -31,6 +31,7 @@ class NetworkServiceImpl implements NetworkService {
 
   final PersistenceService _persistenceService;
 
+  @override
   Future<NetworkResponse> request(NetworkRequest request) async {
     final token = await _persistenceService.getToken();
     final requestUrl = request.isEndpointAbsolute

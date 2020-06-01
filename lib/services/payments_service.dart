@@ -21,6 +21,7 @@ class PaymentsServiceImpl implements PaymentsService {
 
   final NetworkService _networkService;
 
+  @override
   Future<String> fetchPaymentUrl() async {
     final response = await _networkService.request(
       NetworkRequest(

@@ -75,7 +75,7 @@ class AuthServiceImpl implements AuthService {
           throw PsinderException('exception.auth.non_bearer');
         }
 
-        _persistenceService.setToken(jwtResponse.accessToken);
+        await _persistenceService.setToken(jwtResponse.accessToken);
         break;
 
       case 401:

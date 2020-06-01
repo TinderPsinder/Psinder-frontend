@@ -20,6 +20,7 @@ class CardsServiceImpl implements CardsService {
 
   final NetworkService _networkService;
 
+  @override
   Future<List<Dog>> fetchDogs() async {
     try {
       await _networkService.request(

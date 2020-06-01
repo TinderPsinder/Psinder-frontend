@@ -3,7 +3,7 @@ import 'package:psinder/utils/result.dart';
 
 extension FutureLoader on NavigatorState {
   Future<T> futureLoader<T>(Future<T> future) async {
-    final Result<T> result = await push(
+    final result = await push(
       PageRouteBuilder(
         pageBuilder: (context, animation1, animation2) =>
             _FutureLoaderWidget(future: future),

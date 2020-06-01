@@ -13,6 +13,7 @@ class PsinderException implements Exception {
 
   PsinderException(this.key, {this.suffix, this.underlying});
 
+  @override
   String toString() {
     if (key == null) {
       return 'Exception';

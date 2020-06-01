@@ -30,7 +30,7 @@ class _MapWidgetState extends State<MapWidget> {
         initialCameraPosition: _kGooglePlex,
         onMapCreated: (controller) async {
           _controller.complete(controller);
-          controller.setMapStyle(await _mapStyle.future);
+          await controller.setMapStyle(await _mapStyle.future);
         },
       );
 }
