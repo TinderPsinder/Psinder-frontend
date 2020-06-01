@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:psinder/models/dog.dart';
 import 'package:psinder/models/sex.dart';
 import 'package:psinder/pages/dog/dog_page.dart';
+import 'package:psinder/utils/build_image.dart';
 import 'package:psinder/widgets/circular_button.dart';
 
 class EditProfilePage extends StatefulWidget {
@@ -92,13 +93,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
         ),
       );
 
-  Widget _buildPhotoTile(String asdf, int i) => _buildTile(
+  Widget _buildPhotoTile(String photo, int i) => _buildTile(
         Stack(
           children: <Widget>[
             Positioned.fill(
-              child: Image.asset(
-                asdf,
+              child: Image.network(
+                photo,
                 fit: BoxFit.cover,
+                loadingBuilder: buildImageLoader,
+                errorBuilder: buildImageError,
               ),
             ),
             Align(

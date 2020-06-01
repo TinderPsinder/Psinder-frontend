@@ -66,8 +66,8 @@ class Dog {
           description:
               'Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies.',
           pictures: [
-            'assets/images/jamnik1.jpg',
-            'assets/images/jamnik2.jpg',
+            'https://i.imgur.com/2Yq8PMw.jpg',
+            'https://i.imgur.com/VH03jm9.jpg',
           ],
         ),
         Dog(
@@ -78,7 +78,7 @@ class Dog {
           description:
               'Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies.',
           pictures: [
-            'assets/images/jamnik2.jpg',
+            'https://i.imgur.com/VH03jm9.jpg',
           ],
         ),
         Dog(
@@ -89,8 +89,8 @@ class Dog {
           description:
               'Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies.',
           pictures: [
-            'assets/images/jamnik3.jpg',
-            'assets/images/jamnik2.jpg',
+            'https://i.imgur.com/jGhU3aI.jpg',
+            'https://i.imgur.com/VH03jm9.jpg',
           ],
         ),
         Dog(
@@ -101,8 +101,8 @@ class Dog {
           description:
               'Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies.',
           pictures: [
-            'assets/images/jamnik4.jpg',
-            'assets/images/jamnik2.jpg',
+            'https://i.imgur.com/Ds47rBs.jpg',
+            'https://i.imgur.com/VH03jm9.jpg',
           ],
         ),
         Dog(
@@ -113,8 +113,8 @@ class Dog {
           description:
               'Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies.',
           pictures: [
-            'assets/images/jamnik5.jpg',
-            'assets/images/jamnik2.jpg',
+            'https://i.imgur.com/ZaCGlO1.jpg',
+            'https://i.imgur.com/VH03jm9.jpg',
           ],
         ),
         Dog(
@@ -125,8 +125,8 @@ class Dog {
           description:
               'Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies.',
           pictures: [
-            'assets/images/jamnik6.jpg',
-            'assets/images/jamnik2.jpg',
+            'https://i.imgur.com/ljQsdUk.jpg',
+            'https://i.imgur.com/VH03jm9.jpg',
           ],
         ),
       ];

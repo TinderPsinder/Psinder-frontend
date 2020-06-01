@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:psinder/models/dog.dart';
 import 'package:psinder/models/sex.dart';
+import 'package:psinder/utils/build_image.dart';
 import 'package:psinder/widgets/circular_button.dart';
 
 class DogPage extends StatefulWidget {
@@ -61,9 +62,11 @@ class _DogPageState extends State<DogPage> {
         aspectRatio: 1.2,
         child: PageView.builder(
           itemCount: widget._dog.pictures.length,
-          itemBuilder: (_, index) => Image.asset(
+          itemBuilder: (_, index) => Image.network(
             widget._dog.pictures[index],
             fit: BoxFit.cover,
+            loadingBuilder: buildImageLoader,
+            errorBuilder: buildImageError,
           ),
         ),
       );

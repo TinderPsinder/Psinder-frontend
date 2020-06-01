@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
+import 'package:psinder/utils/build_image.dart';
 
 class CardsStack extends StatelessWidget {
   CardsStack({
@@ -33,9 +34,11 @@ class CardsStack extends StatelessWidget {
           cardBuilder: (context, index) => GestureDetector(
             onTap: () => onTap?.call(index),
             child: Card(
-              child: Image.asset(
+              child: Image.network(
                 images[index],
                 fit: BoxFit.cover,
+                loadingBuilder: buildImageLoader,
+                errorBuilder: buildImageError,
               ),
             ),
           ),
