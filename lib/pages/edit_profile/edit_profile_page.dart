@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:psinder/models/dog.dart';
 import 'package:psinder/models/sex.dart';
 import 'package:psinder/pages/dog/dog_page.dart';
+import 'package:psinder/pages/photo/photo_page.dart';
 import 'package:psinder/utils/build_image.dart';
 import 'package:psinder/widgets/circular_button.dart';
 
@@ -94,26 +95,37 @@ class _EditProfilePageState extends State<EditProfilePage> {
       );
 
   Widget _buildPhotoTile(String photo, int i) => _buildTile(
-        Stack(
-          children: <Widget>[
-            Positioned.fill(
-              child: Image.network(
-                photo,
-                fit: BoxFit.cover,
-                loadingBuilder: buildImageLoader,
-                errorBuilder: buildImageError,
+        GestureDetector(
+          child: Stack(
+            children: <Widget>[
+              Positioned.fill(
+                child: Image.network(
+                  photo,
+                  fit: BoxFit.cover,
+                  loadingBuilder: buildImageLoader,
+                  errorBuilder: buildImageError,
+                ),
               ),
-            ),
-            Align(
-              alignment: Alignment.topRight,
-              child: CircularButton(
-                color: Colors.red,
-                icon: Icons.close,
-                compact: true,
-                onPressed: () => setState(() => _dog.pictures.removeAt(i)),
+              Align(
+                alignment: Alignment.topRight,
+                child: CircularButton(
+                  color: Colors.red,
+                  icon: Icons.close,
+                  compact: true,
+                  onPressed: () => setState(() => _dog.pictures.removeAt(i)),
+                ),
               ),
+            ],
+          ),
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => PhotoPage.build(
+                image: NetworkImage(photo),
+              ),
+              fullscreenDialog: true,
             ),
-          ],
+          ),
         ),
       );
 

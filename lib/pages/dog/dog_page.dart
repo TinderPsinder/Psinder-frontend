@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:psinder/models/dog.dart';
 import 'package:psinder/models/sex.dart';
+import 'package:psinder/pages/photo/photo_page.dart';
 import 'package:psinder/utils/build_image.dart';
 import 'package:psinder/widgets/circular_button.dart';
 
@@ -62,12 +63,27 @@ class _DogPageState extends State<DogPage> {
         aspectRatio: 1.2,
         child: PageView.builder(
           itemCount: widget._dog.pictures.length,
-          itemBuilder: (_, index) => Image.network(
-            widget._dog.pictures[index],
-            fit: BoxFit.cover,
-            loadingBuilder: buildImageLoader,
-            errorBuilder: buildImageError,
-          ),
+          itemBuilder: (_, index) {
+            final photo = widget._dog.pictures[index];
+
+            return GestureDetector(
+              child: Image.network(
+                photo,
+                fit: BoxFit.cover,
+                loadingBuilder: buildImageLoader,
+                errorBuilder: buildImageError,
+              ),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => PhotoPage.build(
+                    image: NetworkImage(photo),
+                  ),
+                  fullscreenDialog: true,
+                ),
+              ),
+            );
+          },
         ),
       );
 
