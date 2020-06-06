@@ -40,14 +40,12 @@ class _LoginPageState extends State<LoginPage> {
         appBar: AppBar(
           title: Text(tr('login.title')),
         ),
-        body: Container(
-          alignment: Alignment.center,
-          padding: EdgeInsets.all(32.0),
+        body: Center(
           child: Form(
             key: _formKey,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+            child: ListView(
+              padding: EdgeInsets.all(32.0),
+              shrinkWrap: true,
               children: <Widget>[
                 TextFormField(
                   controller: _usernameController,
