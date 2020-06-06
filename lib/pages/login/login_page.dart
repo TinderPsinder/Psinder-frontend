@@ -127,7 +127,6 @@ class _LoginPageState extends State<LoginPage> {
       await showAlert(
         context,
         content: exception.toString(),
-        onOk: () => Navigator.pop(context),
       );
     }
   }

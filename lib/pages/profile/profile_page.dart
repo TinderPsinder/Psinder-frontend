@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:psinder/main.dart';
 import 'package:psinder/models/dog.dart';
 import 'package:psinder/pages/edit_profile/edit_profile_page.dart';
 import 'package:psinder/pages/payment/payment_page.dart';
@@ -59,11 +60,24 @@ class _ProfilePageState extends State<ProfilePage> {
                 );
               },
             ),
+            _buildPanel(
+              icon: Icons.bug_report,
+              text: tr('profile.debug_mode'),
+              trailing: Switch(
+                value: isTesting,
+                onChanged: (value) => setState(() => isTesting = value),
+              ),
+            ),
           ],
         ),
       );
 
-  Widget _buildPanel({IconData icon, String text, void Function() onTap}) =>
+  Widget _buildPanel({
+    IconData icon,
+    String text,
+    void Function() onTap,
+    Widget trailing,
+  }) =>
       InkWell(
         child: Container(
           width: double.infinity,
@@ -91,6 +105,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
+              if (trailing != null) trailing,
             ],
           ),
         ),

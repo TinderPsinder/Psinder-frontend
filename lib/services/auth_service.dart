@@ -1,9 +1,11 @@
 import 'package:meta/meta.dart';
+import 'package:psinder/main.dart';
 import 'package:psinder/models/requests/login_request.dart';
 import 'package:psinder/models/requests/signup_request.dart';
 import 'package:psinder/models/responses/jwt_response.dart';
 import 'package:psinder/models/responses/message_response.dart';
 import 'package:psinder/models/role.dart';
+import 'package:psinder/services/mock/auth_service_mock.dart';
 import 'package:psinder/services/network_service/network_method.dart';
 import 'package:psinder/services/network_service/network_request.dart';
 import 'package:psinder/services/network_service/network_service.dart';
@@ -11,10 +13,12 @@ import 'package:psinder/services/persistence_service.dart';
 import 'package:psinder/utils/psinder_exception.dart';
 
 abstract class AuthService {
-  factory AuthService.build() => AuthServiceImpl(
-        networkService: NetworkService.build(),
-        persistenceService: PersistenceService.build(),
-      );
+  factory AuthService.build() => isTesting
+      ? AuthServiceMock()
+      : AuthServiceImpl(
+          networkService: NetworkService.build(),
+          persistenceService: PersistenceService.build(),
+        );
 
   Future<bool> isLoggedIn();
 

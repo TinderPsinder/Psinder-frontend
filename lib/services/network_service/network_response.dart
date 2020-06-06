@@ -1,13 +1,14 @@
 import 'package:meta/meta.dart';
 
 class NetworkResponse {
-  NetworkResponse({@required this.statusCode, this.body})
+  NetworkResponse({@required this.statusCode, this.headers, this.body})
       : assert(statusCode != null);
 
   final int statusCode;
+  final Map<String, String> headers;
   final String body;
 
   @override
   String toString() =>
-      'NetworkResponse(statusCode: $statusCode, body: "$body")';
+      'NetworkResponse(statusCode: $statusCode, headers: $headers, body: "$body")';
 }

@@ -71,6 +71,7 @@ class NetworkServiceImpl implements NetworkService {
 
       final result = NetworkResponse(
         statusCode: response.statusCode,
+        headers: response.headers,
         body: response.body,
       );
 

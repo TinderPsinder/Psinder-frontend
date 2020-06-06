@@ -37,6 +37,7 @@
     "profile.preview": "Podgląd profilu",
     "profile.premium": "Zakup konta premium",
     "profile.logout": "Wyloguj",
+    "profile.debug_mode": "Tryb debugowania",
     "edit_profile.title": "Edycja profilu",
     "edit_profile.name": "Imię",
     "edit_profile.age": "Wiek",

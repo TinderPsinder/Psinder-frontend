@@ -1,13 +1,17 @@
 import 'package:meta/meta.dart';
+import 'package:psinder/main.dart';
 import 'package:psinder/models/dog.dart';
+import 'package:psinder/services/mock/cards_service_mock.dart';
 import 'package:psinder/services/network_service/network_method.dart';
 import 'package:psinder/services/network_service/network_request.dart';
 import 'package:psinder/services/network_service/network_service.dart';
 
 abstract class CardsService {
-  factory CardsService.build() => CardsServiceImpl(
-        networkService: NetworkService.build(),
-      );
+  factory CardsService.build() => isTesting
+      ? CardsServiceMock()
+      : CardsServiceImpl(
+          networkService: NetworkService.build(),
+        );
 
   Future<List<Dog>> fetchDogs();
 }
