@@ -33,7 +33,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   void initState() {
     super.initState();
 
-    _dog = widget._dog;
+    _dog = widget._dog.copy();
   }
 
   @override
@@ -126,6 +126,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
               fullscreenDialog: true,
             ),
           ),
+          onLongPress: () => setState(() {
+            _dog.pictures.removeAt(i);
+            _dog.pictures.insert(0, photo);
+          }),
         ),
       );
 
