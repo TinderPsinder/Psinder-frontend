@@ -48,7 +48,10 @@ class _MainPageState extends State<MainPage> {
         appBar: AppBar(
           title: Text(tr('main.title')),
         ),
-        body: _tabs[_selectedTabIndex].widget,
+        body: IndexedStack(
+          children: _tabs.map((tab) => tab.builder()).toList(),
+          index: _selectedTabIndex,
+        ),
         bottomNavigationBar: BottomNavigationBar(
           items: _tabs
               .map(
@@ -80,8 +83,4 @@ class _MainPageTab {
   })  : assert(title != null),
         assert(icon != null),
         assert(builder != null);
-
-  Widget get widget => _widget ??= builder();
-
-  Widget _widget;
 }

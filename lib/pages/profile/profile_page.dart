@@ -61,7 +61,7 @@ class _ProfilePageState extends State<ProfilePage> {
               final newDog = await Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => EditProfilePage.build(dog: _dog.copy()),
+                  builder: (_) => EditProfilePage.build(dog: _dog),
                 ),
               );
 
