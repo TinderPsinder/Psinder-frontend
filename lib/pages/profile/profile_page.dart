@@ -33,7 +33,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  var _dog = Dog.mocks.first;
+  var _dog = Dog.mocks[2];
   var _hasPremium = false;
 
   @override

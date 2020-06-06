@@ -68,73 +68,167 @@ class Dog {
 
   static List<Dog> get mocks => [
         Dog(
-          name: 'Pies',
-          breed: 'Jamnik',
+          name: 'Burek',
+          breed: 'York',
           sex: Sex.dog,
-          age: 10,
-          description:
-              'Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies.',
+          age: 3,
+          description: 'Lubię sport',
           pictures: [
             'https://i.imgur.com/2Yq8PMw.jpg',
             'https://i.imgur.com/VH03jm9.jpg',
           ],
         ),
         Dog(
-          name: 'Pies',
-          breed: 'Jamnik',
+          name: 'Azor',
+          breed: 'Kundel',
           sex: Sex.dog,
-          age: 10,
-          description:
-              'Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies.',
+          age: 8,
+          description: 'Jestem kundlem, który lubi dobrą zabawę.',
           pictures: [
             'https://i.imgur.com/VH03jm9.jpg',
           ],
         ),
         Dog(
-          name: 'Pies',
-          breed: 'Jamnik',
+          name: 'Bruno',
+          breed: 'Golden  Retriever',
           sex: Sex.dog,
-          age: 10,
+          age: 5,
           description:
-              'Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies.',
+              'Lubię się dobrze zabawić oraz towarzystwo pięknych suczek.',
           pictures: [
             'https://i.imgur.com/jGhU3aI.jpg',
             'https://i.imgur.com/VH03jm9.jpg',
           ],
         ),
         Dog(
-          name: 'Pies',
-          breed: 'Jamnik',
+          name: 'Antek',
+          description: 'Szukam stałej relacji',
+          breed: 'Kundel',
           sex: Sex.dog,
-          age: 10,
-          description:
-              'Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies.',
+          age: 2,
           pictures: [
             'https://i.imgur.com/Ds47rBs.jpg',
             'https://i.imgur.com/VH03jm9.jpg',
           ],
         ),
         Dog(
-          name: 'Pies',
-          breed: 'Jamnik',
-          sex: Sex.dog,
-          age: 10,
-          description:
-              'Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies.',
+          name: 'Ania',
+          breed: 'Maltańczyk',
+          sex: Sex.bitch,
+          age: 3,
+          description: 'Nie wiem czego tu szukam',
           pictures: [
             'https://i.imgur.com/ZaCGlO1.jpg',
             'https://i.imgur.com/VH03jm9.jpg',
           ],
         ),
         Dog(
-          name: 'Pies',
-          breed: 'Jamnik',
+          name: 'Paweł',
+          breed: 'Maltańczyk',
           sex: Sex.dog,
-          age: 10,
-          description:
-              'Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies. Pies pies pies pies pies pies pies pies pies pies.',
+          age: 5,
+          description: 'Kocham podróże',
           pictures: [
             'https://i.imgur.com/ljQsdUk.jpg',
+            'https://i.imgur.com/VH03jm9.jpg',
+          ],
+        ),
+        Dog(
+          name: 'Saba',
+          breed: 'York',
+          sex: Sex.bitch,
+          age: 5,
+          description: 'Gryzę',
+          pictures: [
+            'https://i.imgur.com/2Yq8PMw.jpg',
+            'https://i.imgur.com/VH03jm9.jpg',
+          ],
+        ),
+        Dog(
+          name: 'Azorek',
+          breed: 'Kundel',
+          sex: Sex.dog,
+          age: 3,
+          description: 'Jestem zabawnym psem',
+          pictures: [
+            'https://i.imgur.com/VH03jm9.jpg',
+          ],
+        ),
+        Dog(
+          name: 'Grot',
+          breed: 'Owczarek',
+          sex: Sex.dog,
+          age: 7,
+          description: 'Zapraszam na priv',
+          pictures: [
+            'https://i.imgur.com/jGhU3aI.jpg',
+            'https://i.imgur.com/VH03jm9.jpg',
+          ],
+        ),
+        Dog(
+          name: 'Frania',
+          breed: 'Mops',
+          sex: Sex.bitch,
+          age: 3,
+          description: 'Klasa i styl',
+          pictures: [
+            'https://i.imgur.com/Ds47rBs.jpg',
+            'https://i.imgur.com/VH03jm9.jpg',
+          ],
+        ),
+        Dog(
+          name: 'Alexandra',
+          breed: 'Mops',
+          sex: Sex.bitch,
+          age: 4,
+          description: 'Lubię długie rozmowy wieczorami. Popiszemy?',
+          pictures: [
+            'https://i.imgur.com/ZaCGlO1.jpg',
+            'https://i.imgur.com/VH03jm9.jpg',
+          ],
+        ),
+        Dog(
+          name: 'Kristina',
+          breed: 'Pudel',
+          sex: Sex.bitch,
+          age: 8,
+          description: 'Lubię imprezy techno',
+          pictures: [
+            'https://i.imgur.com/ljQsdUk.jpg',
+            'https://i.imgur.com/VH03jm9.jpg',
+          ],
+        ),
+        Dog(
+          name: 'Alex',
+          breed: 'Jamnik',
+          sex: Sex.dog,
+          age: 4,
+          description:
+              'Jestem człowiekiem pracy, ale chętnie wyjdę wieczorem na wino',
+          pictures: [
+            'https://i.imgur.com/2Yq8PMw.jpg',
+            'https://i.imgur.com/VH03jm9.jpg',
+          ],
+        ),
+        Dog(
+          name: 'Marcin',
+          breed: 'Jamnik',
+          sex: Sex.dog,
+          age: 3,
+          description:
+              'Zajmuję się ogrodnictwem, posiadam sad, gdzie hoduję wiśnie. Dodatkowo jestem właścicielem lasu z przytulnym leśnym zagajniczkiem. Chętnie Cię tam zabiorę i spędzimy miło czas',
+          pictures: [
+            'https://i.imgur.com/VH03jm9.jpg',
+          ],
+        ),
+        Dog(
+          name: 'Alojzy',
+          breed: 'Beagle',
+          sex: Sex.dog,
+          age: 7,
+          description: 'Popiszemy? :))))',
+          pictures: [
+            'https://i.imgur.com/jGhU3aI.jpg',
             'https://i.imgur.com/VH03jm9.jpg',
           ],
         ),
