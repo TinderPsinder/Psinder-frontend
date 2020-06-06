@@ -16,6 +16,7 @@ abstract class PaymentsService {
           networkService: NetworkService.build(),
         );
 
+  Future<bool> hasPremium();
   Future<String> fetchPaymentUrl();
 }
 
@@ -26,6 +27,14 @@ class PaymentsServiceImpl implements PaymentsService {
         _networkService = networkService;
 
   final NetworkService _networkService;
+
+  @override
+  Future<bool> hasPremium() async {
+    // TODO: implement
+    await Future.delayed(Duration(milliseconds: 500));
+
+    return false;
+  }
 
   @override
   Future<String> fetchPaymentUrl() async {

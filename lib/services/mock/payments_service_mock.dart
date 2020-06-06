@@ -13,6 +13,15 @@ class PaymentsServiceMock implements PaymentsService {
 
   final NetworkService _networkService;
 
+  static var _hasPremium = false;
+
+  @override
+  Future<bool> hasPremium() async {
+    await Future.delayed(Duration(milliseconds: 500));
+
+    return _hasPremium;
+  }
+
   @override
   Future<String> fetchPaymentUrl() async {
     final response = await _networkService.request(
@@ -52,6 +61,8 @@ class PaymentsServiceMock implements PaymentsService {
 
     switch (response.statusCode) {
       case 302:
+        _hasPremium = true;
+
         return response.headers['location'];
 
       default:

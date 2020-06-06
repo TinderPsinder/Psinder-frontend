@@ -41,6 +41,15 @@ class Dog {
     );
   }
 
+  Dog copy() => Dog(
+        name: name,
+        breed: breed,
+        sex: sex,
+        age: age,
+        description: description,
+        pictures: List.from(pictures),
+      );
+
   static List<String> _parsePictures(xml.XmlElement pictures) =>
       pictures.findElements('picture').map((picture) => picture.text).toList();
 

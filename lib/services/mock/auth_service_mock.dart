@@ -3,7 +3,7 @@ import 'package:psinder/services/auth_service.dart';
 import 'package:psinder/utils/psinder_exception.dart';
 
 class AuthServiceMock implements AuthService {
-  static bool _isLoggedIn = false;
+  static var _isLoggedIn = false;
 
   static final _registeredUsers = [
     _User(email: 'test@test.pl', username: 'test', password: '123456'),

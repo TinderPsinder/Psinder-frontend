@@ -23,5 +23,5 @@ Future<void> main() async {
 }
 
 Future<void> refreshIsTesting() async {
-  _isTesting = await _persistenceService.getTesting() ?? false;
+  _isTesting = await _persistenceService.getTesting() ?? true;
 }
