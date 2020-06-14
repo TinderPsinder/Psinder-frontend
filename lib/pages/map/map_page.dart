@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:psinder/models/dog.dart';
+import 'package:psinder/models/likes.dart';
 import 'package:psinder/models/location.dart';
 import 'package:psinder/models/sex.dart';
 import 'package:psinder/pages/dog/dog_page.dart';
@@ -35,24 +36,23 @@ class _MapPageState extends State<MapPage> {
   Set<Marker> _markers;
 
   @override
-  void initState() {
-    super.initState();
+  Widget build(BuildContext context) {
+    _fetchMarkers();
 
-    _fetchCards();
+    return MapWidget(
+      markers: _markers,
+    );
   }
 
-  @override
-  Widget build(BuildContext context) => MapWidget(
-        markers: _markers,
-      );
-
-  Future<void> _fetchCards() async {
+  Future<void> _fetchMarkers() async {
     List<Location> locations;
     List<Dog> dogs;
+    Likes likes;
 
     await Future.wait([
       widget._mapsService.fetchLocations().then((value) => locations = value),
       widget._cardsService.fetchDogs().then((value) => dogs = value),
+      widget._cardsService.fetchLikes().then((value) => likes = value),
     ]);
 
     final markers = locations
@@ -62,28 +62,34 @@ class _MapPageState extends State<MapPage> {
             orElse: () => null,
           );
 
-          if (dog != null) {
-            return Marker(
-              markerId: MarkerId(location.id.toString()),
-              position: LatLng(location.lat, location.lng),
-              infoWindow: InfoWindow(
-                title: '${dog.name}, ${dog.age}',
-                snippet: '${dog.sex.toLocalizedString()}, ${dog.breed}',
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => DogPage.build(dog: dog),
-                  ),
-                ),
-              ),
-            );
-          } else {
+          if (dog == null) {
             return null;
           }
+
+          if (!likes.liked.contains(dog.id)) {
+            return null;
+          }
+
+          return Marker(
+            markerId: MarkerId(location.id.toString()),
+            position: LatLng(location.lat, location.lng),
+            infoWindow: InfoWindow(
+              title: '${dog.name}, ${dog.age}',
+              snippet: '${dog.sex.toLocalizedString()}, ${dog.breed}',
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => DogPage.build(dog: dog),
+                ),
+              ),
+            ),
+          );
         })
         .where((marker) => marker != null)
         .toSet();
 
-    setState(() => _markers = markers);
+    if (_markers != markers) {
+      setState(() => _markers = markers);
+    }
   }
 }

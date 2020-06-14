@@ -41,7 +41,18 @@ class _CardsPageState extends State<CardsPage> {
               images: dogs?.map((dog) => dog.pictures.first)?.toList(),
               controller: _cardController,
               onSwipe: (index, orientation) {
-                print('$index, $orientation');
+                switch (orientation) {
+                  case CardSwipeOrientation.LEFT:
+                    widget._cardsService.dislike(dogs[index]);
+                    break;
+
+                  case CardSwipeOrientation.RIGHT:
+                    widget._cardsService.like(dogs[index]);
+                    break;
+
+                  default:
+                    break;
+                }
               },
               onTap: (index) => Navigator.push(
                 context,

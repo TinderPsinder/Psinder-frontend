@@ -2,18 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:psinder/models/dog.dart';
 import 'package:psinder/models/sex.dart';
 import 'package:psinder/pages/photo/photo_page.dart';
+import 'package:psinder/services/cards_service.dart';
 import 'package:psinder/utils/build_image.dart';
 import 'package:psinder/widgets/circular_button.dart';
 
 class DogPage extends StatefulWidget {
-  const DogPage({@required Dog dog, Key key})
-      : assert(dog != null),
+  const DogPage({
+    @required Dog dog,
+    @required CardsService cardsService,
+    Key key,
+  })  : assert(dog != null),
+        assert(cardsService != null),
         _dog = dog,
+        _cardsService = cardsService,
         super(key: key);
 
-  factory DogPage.build({@required Dog dog}) => DogPage(dog: dog);
+  factory DogPage.build({@required Dog dog}) => DogPage(
+        dog: dog,
+        cardsService: CardsService.build(),
+      );
 
   final Dog _dog;
+  final CardsService _cardsService;
 
   @override
   _DogPageState createState() => _DogPageState();
@@ -139,12 +149,12 @@ class _DogPageState extends State<DogPage> {
           CircularButton(
             color: Colors.red,
             icon: Icons.close,
-            onPressed: () {},
+            onPressed: () => widget._cardsService.dislike(widget._dog),
           ),
           CircularButton(
             color: Colors.green,
             icon: Icons.favorite,
-            onPressed: () {},
+            onPressed: () => widget._cardsService.like(widget._dog),
           ),
         ],
       );
