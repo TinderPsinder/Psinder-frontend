@@ -38,6 +38,8 @@
 	<string>Aplikacja musi uzyskać dostęp do aparatu</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Aplikacja musi uzyskać dostęp do mikrofonu</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Aplikacja musi uzyskać dostęp do lokalizacji</string>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
 </dict>

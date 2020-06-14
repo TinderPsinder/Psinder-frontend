@@ -5,6 +5,10 @@ import 'package:flutter/widgets.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapWidget extends StatefulWidget {
+  const MapWidget({this.markers, Key key}) : super(key: key);
+
+  final Set<Marker> markers;
+
   @override
   _MapWidgetState createState() => _MapWidgetState();
 }
@@ -12,11 +16,6 @@ class MapWidget extends StatefulWidget {
 class _MapWidgetState extends State<MapWidget> {
   final _controller = Completer<GoogleMapController>();
   final _mapStyle = Completer<String>();
-
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
 
   @override
   void initState() {
@@ -27,7 +26,15 @@ class _MapWidgetState extends State<MapWidget> {
 
   @override
   Widget build(BuildContext context) => GoogleMap(
-        initialCameraPosition: _kGooglePlex,
+        initialCameraPosition: CameraPosition(
+          target: LatLng(51.1065, 17.0197),
+          zoom: 11.0,
+        ),
+        mapToolbarEnabled: false,
+        zoomControlsEnabled: false,
+        tiltGesturesEnabled: false,
+        myLocationEnabled: true,
+        markers: widget.markers,
         onMapCreated: (controller) async {
           _controller.complete(controller);
           await controller.setMapStyle(await _mapStyle.future);

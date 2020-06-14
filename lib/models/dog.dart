@@ -4,6 +4,7 @@ import 'package:psinder/utils/psinder_exception.dart';
 import 'package:xml/xml.dart' as xml;
 
 class Dog {
+  int id;
   String name;
   String breed;
   Sex sex;
@@ -12,6 +13,7 @@ class Dog {
   List<String> pictures;
 
   Dog({
+    @required this.id,
     @required this.name,
     @required this.breed,
     @required this.sex,
@@ -19,6 +21,7 @@ class Dog {
     @required this.description,
     @required this.pictures,
   }) {
+    if (id == null) throw PsinderException.parse('id');
     if (name == null) throw PsinderException.parse('name');
     if (breed == null) throw PsinderException.parse('breed');
     if (sex == null) throw PsinderException.parse('sex');
@@ -32,6 +35,7 @@ class Dog {
     final dog = document.findElements('Dog').first;
 
     return Dog(
+      id: int.parse(dog.findElements('id').first.text),
       name: dog.findElements('name').first.text,
       breed: dog.findElements('breed').first.text,
       sex: _parseSex(dog.findElements('sex').first.text),
@@ -42,6 +46,7 @@ class Dog {
   }
 
   Dog copy() => Dog(
+        id: id,
         name: name,
         breed: breed,
         sex: sex,
@@ -68,6 +73,7 @@ class Dog {
 
   static List<Dog> get mocks => [
         Dog(
+          id: 1,
           name: 'Burek',
           breed: 'York',
           sex: Sex.dog,
@@ -79,6 +85,7 @@ class Dog {
           ],
         ),
         Dog(
+          id: 2,
           name: 'Azor',
           breed: 'Kundel',
           sex: Sex.dog,
@@ -89,6 +96,7 @@ class Dog {
           ],
         ),
         Dog(
+          id: 3,
           name: 'Bruno',
           breed: 'Golden Retriever',
           sex: Sex.dog,
@@ -101,6 +109,7 @@ class Dog {
           ],
         ),
         Dog(
+          id: 4,
           name: 'Antek',
           description: 'Szukam stałej relacji',
           breed: 'Kundel',
@@ -112,6 +121,7 @@ class Dog {
           ],
         ),
         Dog(
+          id: 5,
           name: 'Ania',
           breed: 'Maltańczyk',
           sex: Sex.bitch,
@@ -123,6 +133,7 @@ class Dog {
           ],
         ),
         Dog(
+          id: 6,
           name: 'Paweł',
           breed: 'Maltańczyk',
           sex: Sex.dog,
@@ -134,6 +145,7 @@ class Dog {
           ],
         ),
         Dog(
+          id: 7,
           name: 'Saba',
           breed: 'York',
           sex: Sex.bitch,
@@ -145,6 +157,7 @@ class Dog {
           ],
         ),
         Dog(
+          id: 8,
           name: 'Azorek',
           breed: 'Kundel',
           sex: Sex.dog,
@@ -155,6 +168,7 @@ class Dog {
           ],
         ),
         Dog(
+          id: 9,
           name: 'Grot',
           breed: 'Owczarek',
           sex: Sex.dog,
@@ -166,6 +180,7 @@ class Dog {
           ],
         ),
         Dog(
+          id: 10,
           name: 'Frania',
           breed: 'Mops',
           sex: Sex.bitch,
@@ -177,6 +192,7 @@ class Dog {
           ],
         ),
         Dog(
+          id: 11,
           name: 'Alexandra',
           breed: 'Mops',
           sex: Sex.bitch,
@@ -188,6 +204,7 @@ class Dog {
           ],
         ),
         Dog(
+          id: 12,
           name: 'Kristina',
           breed: 'Pudel',
           sex: Sex.bitch,
@@ -199,6 +216,7 @@ class Dog {
           ],
         ),
         Dog(
+          id: 13,
           name: 'Alex',
           breed: 'Jamnik',
           sex: Sex.dog,
@@ -211,6 +229,7 @@ class Dog {
           ],
         ),
         Dog(
+          id: 14,
           name: 'Marcin',
           breed: 'Jamnik',
           sex: Sex.dog,
@@ -222,6 +241,7 @@ class Dog {
           ],
         ),
         Dog(
+          id: 15,
           name: 'Alojzy',
           breed: 'Beagle',
           sex: Sex.dog,
