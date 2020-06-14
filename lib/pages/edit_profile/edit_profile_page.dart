@@ -1,24 +1,34 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:psinder/extensions/future_loader.dart';
 import 'package:psinder/models/dog.dart';
 import 'package:psinder/models/sex.dart';
 import 'package:psinder/pages/dog/dog_page.dart';
 import 'package:psinder/pages/photo/photo_page.dart';
+import 'package:psinder/services/firebase_service.dart';
 import 'package:psinder/utils/build_image.dart';
 import 'package:psinder/widgets/circular_button.dart';
 
 class EditProfilePage extends StatefulWidget {
-  const EditProfilePage({@required Dog dog, Key key})
-      : assert(dog != null),
+  const EditProfilePage({
+    @required Dog dog,
+    @required FirebaseService firebaseService,
+    Key key,
+  })  : assert(dog != null),
+        assert(firebaseService != null),
         _dog = dog,
+        _firebaseService = firebaseService,
         super(key: key);
 
   factory EditProfilePage.build({@required Dog dog}) => EditProfilePage(
         dog: dog,
+        firebaseService: FirebaseService.build(),
       );
 
   final Dog _dog;
+  final FirebaseService _firebaseService;
 
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
@@ -137,7 +147,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         Material(
           color: Colors.grey.shade200,
           child: InkWell(
-            onTap: () {},
+            onTap: _onUploadTilePressed,
             child: Icon(
               Icons.add_a_photo,
               size: 32.0,
@@ -257,5 +267,42 @@ class _EditProfilePageState extends State<EditProfilePage> {
     }
 
     Navigator.pop(context, _dog);
+  }
+
+  Future<void> _onUploadTilePressed() async {
+    final image = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxWidth: 1000,
+      maxHeight: 1000,
+      imageQuality: 80,
+    );
+
+    final filename = image.path?.split('/')?.last;
+    if (filename == null) return;
+
+    final name = filename.replaceFirst('image_picker_', '');
+    final contentType = _extToContentType(filename.split('.').last);
+
+    final uploadedUrl = await Navigator.of(context).futureLoader(
+      widget._firebaseService.uploadToStorage(
+        contentType: contentType,
+        content: await image.readAsBytes(),
+        path: 'app/$name',
+      ),
+    );
+
+    setState(() => _dog.pictures.add(uploadedUrl));
+  }
+
+  String _extToContentType(String ext) {
+    switch (ext) {
+      case 'png':
+        return 'image/png';
+      case 'jpeg':
+      case 'jpg':
+        return 'image/jpeg';
+      default:
+        return null;
+    }
   }
 }

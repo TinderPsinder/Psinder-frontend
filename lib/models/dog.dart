@@ -90,7 +90,7 @@ class Dog {
         ),
         Dog(
           name: 'Bruno',
-          breed: 'Golden  Retriever',
+          breed: 'Golden Retriever',
           sex: Sex.dog,
           age: 5,
           description:

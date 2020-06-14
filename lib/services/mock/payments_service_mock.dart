@@ -29,6 +29,7 @@ class PaymentsServiceMock implements PaymentsService {
         method: NetworkMethod.post,
         endpoint: 'https://secure.snd.payu.com/api/v2_1/orders',
         withToken: false,
+        withBaseHeaders: false,
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer d9a4536e-62ba-4f60-8017-6053211d3f47',

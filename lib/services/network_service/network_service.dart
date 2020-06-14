@@ -38,7 +38,7 @@ class NetworkServiceImpl implements NetworkService {
         ? request.endpoint
         : baseUrl + request.endpoint;
     final requestHeaders = {
-      ...baseHeaders,
+      if (request.withBaseHeaders) ...baseHeaders,
       ...request.headers,
       if (request.withToken && token != null) ...{
         'Authorization': 'Bearer $token',
