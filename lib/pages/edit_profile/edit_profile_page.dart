@@ -277,7 +277,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       imageQuality: 80,
     );
 
-    final filename = image.path?.split('/')?.last;
+    final filename = image?.path?.split('/')?.last;
     if (filename == null) return;
 
     final name = filename.replaceFirst('image_picker_', '');
